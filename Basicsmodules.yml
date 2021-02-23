@@ -1,0 +1,21 @@
+---
+- hosts: tomcat
+  tasks:
+   - name: running date
+     shell: date
+   - name: create folder
+     file:
+       path: /tmp/balaji
+       state: directory
+   - name: stop tomcat
+     shell: systemctl stop tomcat
+   - name : start tomcat
+     service:
+       name: tomcat
+       state: started
+   - name: copy sample file
+     copy:
+      src: /home/ec2-user/ansible/sample.txt
+      dest: /tmp/s.txt
+   - name: running script
+     script: script.sh
